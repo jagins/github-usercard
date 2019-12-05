@@ -26,7 +26,7 @@ const cardContainer = document.querySelector('.cards');
 axios.get("https://api.github.com/users/jagins")
 .then((result) => 
 {
-  cardContainer.appendChild(newCard(result));
+  cardContainer.appendChild(createNewCard(result));
 }).catch((err) => 
 {
   console.log('The data was not returned, err');
@@ -61,7 +61,7 @@ const followersArray = [];
   luishrd
   bigknell
 */
-function newCard(obj)
+function createNewCard(obj)
 {
   const cardDiv = document.createElement('div'),
         cardImg = document.createElement('img'),
