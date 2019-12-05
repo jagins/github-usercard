@@ -2,7 +2,14 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
-
+/*axios.get("https://api.github.com/users/jagins")
+.then((result) => 
+{
+  newCard(result);
+}).catch((err) => 
+{
+  console.log('The data was not returned, err);
+});*/
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
    data in order to use it to build your component function 
@@ -30,7 +37,7 @@ const followersArray = [];
           Using DOM methods and properties, create a component that will return the following DOM element:
 
 <div class="card">
-  <img src={image url of user} />
+  <img src={image url of user} />*
   <div class="card-info">
     <h3 class="name">{users name}</h3>
     <p class="username">{users user name}</p>
@@ -53,3 +60,47 @@ const followersArray = [];
   luishrd
   bigknell
 */
+function newCard(obj)
+{
+  const cardDiv = document.createElement('div'),
+        cardImg = document.createElement('img'),
+        cardInfoDiv = document.createElement('div'),
+        cardH3 = document.createElement('h3'),
+        cardPUser = document.createElement('p'),
+        cardPLoc = document.createElement('p'),
+        cardProfileP = document.createElement('p'),
+        cardALink = document.createElement('a'),
+        cardPFollower = document.createElement('p'),
+        cardPFollowing = document.createElement('p'),
+        cardPBio = document.createElement('p');
+
+  cardDiv.classList.add('card');
+  cardInfoDiv.classList.add('card-info');
+  cardH3.classList.add('name');
+  cardPUser.classList.add('username');
+
+  cardImg.src = obj.data.avatar_url;
+  cardH3.textContent = obj.data.name;
+  cardPUser.textContent = obj.data.login;
+  cardPLoc.textContent = `Location: ${obj.data.location}`;
+  cardProfileP.textContent = `Profile: `;
+  cardALink.href = obj.data.html_url;
+  cardALink.textContent = obj.data.html_url;
+  cardPFollower.textContent = `Followers: ${obj.data.followers}`;
+  cardPFollowing.textContent = `Following: ${obj.data.following}`;
+  cardPBio.textContent = `Bio: ${obj.data.bio}`;
+
+cardDiv.appendChild(cardImg);
+cardDiv.appendChild(cardInfoDiv);
+cardInfoDiv.appendChild(cardH3);
+cardInfoDiv.appendChild(cardPUser);
+cardInfoDiv.appendChild(cardPLoc);
+cardInfoDiv.appendChild(cardProfileP);
+cardProfileP.appendChild(cardALink);
+cardInfoDiv.appendChild(cardPFollower);
+cardInfoDiv.appendChild(cardPFollowing);
+cardInfoDiv.appendChild(cardPBio);
+
+console.log(cardDiv);
+
+}
