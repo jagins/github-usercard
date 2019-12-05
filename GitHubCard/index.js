@@ -108,7 +108,15 @@ function createNewCard(obj)
   cardALink.textContent = obj.data.html_url;
   cardPFollower.textContent = `Followers: ${obj.data.followers}`;
   cardPFollowing.textContent = `Following: ${obj.data.following}`;
-  cardPBio.textContent = `Bio: ${obj.data.bio}`;
+  
+  if(obj.data.bio === null)
+  {
+    cardPBio.textContent = `Bio: ${obj.data.name} needs to fill this in on Github`;
+  }
+  else
+  {
+    cardPBio.textContent = `Bio: ${obj.data.bio}`;
+  }
 
   cardDiv.appendChild(cardImg);
   cardDiv.appendChild(cardInfoDiv);
