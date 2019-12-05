@@ -22,16 +22,23 @@
           Using that array, iterate over it, requesting data for each user, creating a new card for each
           user, and adding that card to the DOM.
 */
+
+//get a handle of the div in HTML to display the cards
 const cardContainer = document.querySelector('.cards');
+
+//api call to my github profile
 axios.get("https://api.github.com/users/jagins")
 .then((result) => 
 {
+  //successful result creates a new card and displays it
   cardContainer.appendChild(createNewCard(result));
 }).catch((err) => 
 {
+  //if errored out display what the error was to the console
   console.log('The data was not returned', err);
 });
 
+//creates an array of my followers github profiles
 const followersArray = 
 [
   "https://api.github.com/users/Katrina-Dierking", 
@@ -42,6 +49,7 @@ const followersArray =
   "https://api.github.com/users/anamonteiro430"
 ];
 
+//loop through the array to create new cards and display them
 for(let i = 0; i < followersArray.length; i++)
 {
   axios.get(followersArray[i])
@@ -50,7 +58,7 @@ for(let i = 0; i < followersArray.length; i++)
     cardContainer.appendChild(createNewCard(result));
   }).catch((err) => 
   {
-    console.log('The data was not returned, err');
+    console.log('The data was not returned', err);
   });
 }
 /* Step 3: Create a function that accepts a single object as its only argument,
@@ -80,8 +88,11 @@ for(let i = 0; i < followersArray.length; i++)
   luishrd
   bigknell
 */
+
+//creates a new compontent for the cards
 function createNewCard(obj)
 {
+  //element creation see above template
   const cardDiv = document.createElement('div'),
         cardImg = document.createElement('img'),
         cardInfoDiv = document.createElement('div'),
@@ -94,11 +105,13 @@ function createNewCard(obj)
         cardPFollowing = document.createElement('p'),
         cardPBio = document.createElement('p');
 
+  //add classes to the elements
   cardDiv.classList.add('card');
   cardInfoDiv.classList.add('card-info');
   cardH3.classList.add('name');
   cardPUser.classList.add('username');
 
+  //filling in the content of the elements
   cardImg.src = obj.data.avatar_url;
   cardH3.textContent = obj.data.name;
   cardPUser.textContent = obj.data.login;
@@ -108,6 +121,7 @@ function createNewCard(obj)
   cardPFollower.textContent = `Followers: ${obj.data.followers}`;
   cardPFollowing.textContent = `Following: ${obj.data.following}`;
   
+  //checks if values are null and if they are display a generic message otherwise use what's in their profile
   if(obj.data.bio === null)
   {
     cardPBio.textContent = `Bio: ${obj.data.name} needs to fill this in on Github`;
@@ -127,6 +141,7 @@ function createNewCard(obj)
     cardPLoc.textContent = `Location: ${obj.data.location}`;
   }
 
+  //stitch together the elements with everything filled in
   cardDiv.appendChild(cardImg);
   cardDiv.appendChild(cardInfoDiv);
   cardInfoDiv.appendChild(cardH3);
@@ -138,5 +153,6 @@ function createNewCard(obj)
   cardInfoDiv.appendChild(cardPFollowing);
   cardInfoDiv.appendChild(cardPBio);
 
+  //return final div for the card
   return cardDiv;
 }
