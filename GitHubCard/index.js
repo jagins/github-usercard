@@ -29,7 +29,7 @@ axios.get("https://api.github.com/users/jagins")
   cardContainer.appendChild(createNewCard(result));
 }).catch((err) => 
 {
-  console.log('The data was not returned, err');
+  console.log('The data was not returned', err);
 });
 
 const followersArray = 
