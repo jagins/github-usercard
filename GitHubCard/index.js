@@ -32,8 +32,27 @@ axios.get("https://api.github.com/users/jagins")
   console.log('The data was not returned, err');
 });
 
-const followersArray = [];
+const followersArray = 
+[
+  "https://api.github.com/users/Katrina-Dierking", 
+  "https://api.github.com/users/Judson00",
+  "https://api.github.com/users/davebettswebdev",
+  "https://api.github.com/users/PHONGdotTech",
+  "https://api.github.com/users/acarrillo3",
+  "https://api.github.com/users/anamonteiro430"
+];
 
+for(let i = 0; i < followersArray.length; i++)
+{
+  axios.get(followersArray[i])
+  .then((result) => 
+  {
+    cardContainer.appendChild(createNewCard(result));
+  }).catch((err) => 
+  {
+    console.log('The data was not returned, err');
+  });
+}
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
 
