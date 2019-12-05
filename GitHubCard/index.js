@@ -2,14 +2,6 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
-/*axios.get("https://api.github.com/users/jagins")
-.then((result) => 
-{
-  newCard(result);
-}).catch((err) => 
-{
-  console.log('The data was not returned, err);
-});*/
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
    data in order to use it to build your component function 
@@ -30,6 +22,15 @@
           Using that array, iterate over it, requesting data for each user, creating a new card for each
           user, and adding that card to the DOM.
 */
+const cardContainer = document.querySelector('.cards');
+axios.get("https://api.github.com/users/jagins")
+.then((result) => 
+{
+  cardContainer.appendChild(newCard(result));
+}).catch((err) => 
+{
+  console.log('The data was not returned, err');
+});
 
 const followersArray = [];
 
@@ -90,17 +91,16 @@ function newCard(obj)
   cardPFollowing.textContent = `Following: ${obj.data.following}`;
   cardPBio.textContent = `Bio: ${obj.data.bio}`;
 
-cardDiv.appendChild(cardImg);
-cardDiv.appendChild(cardInfoDiv);
-cardInfoDiv.appendChild(cardH3);
-cardInfoDiv.appendChild(cardPUser);
-cardInfoDiv.appendChild(cardPLoc);
-cardInfoDiv.appendChild(cardProfileP);
-cardProfileP.appendChild(cardALink);
-cardInfoDiv.appendChild(cardPFollower);
-cardInfoDiv.appendChild(cardPFollowing);
-cardInfoDiv.appendChild(cardPBio);
+  cardDiv.appendChild(cardImg);
+  cardDiv.appendChild(cardInfoDiv);
+  cardInfoDiv.appendChild(cardH3);
+  cardInfoDiv.appendChild(cardPUser);
+  cardInfoDiv.appendChild(cardPLoc);
+  cardInfoDiv.appendChild(cardProfileP);
+  cardProfileP.appendChild(cardALink);
+  cardInfoDiv.appendChild(cardPFollower);
+  cardInfoDiv.appendChild(cardPFollowing);
+  cardInfoDiv.appendChild(cardPBio);
 
-console.log(cardDiv);
-
+  return cardDiv;
 }
