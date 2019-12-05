@@ -49,6 +49,7 @@ const followersArray =
   "https://api.github.com/users/anamonteiro430"
 ];
 
+
 //loop through the array to create new cards and display them
 for(let i = 0; i < followersArray.length; i++)
 {
