@@ -102,7 +102,6 @@ function createNewCard(obj)
   cardImg.src = obj.data.avatar_url;
   cardH3.textContent = obj.data.name;
   cardPUser.textContent = obj.data.login;
-  cardPLoc.textContent = `Location: ${obj.data.location}`;
   cardProfileP.textContent = `Profile: `;
   cardALink.href = obj.data.html_url;
   cardALink.textContent = obj.data.html_url;
@@ -116,6 +115,16 @@ function createNewCard(obj)
   else
   {
     cardPBio.textContent = `Bio: ${obj.data.bio}`;
+  }
+
+  if(obj.data.location === null)
+  {
+    cardPLoc.textContent = 'Location: Unknown';
+
+  }
+  else
+  {
+    cardPLoc.textContent = `Location: ${obj.data.location}`;
   }
 
   cardDiv.appendChild(cardImg);
